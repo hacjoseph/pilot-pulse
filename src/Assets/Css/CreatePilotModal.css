@@ -1,0 +1,16 @@
+.form-group{
+    margin-bottom: 15px;
+}
+
+.form-group input{
+    width: 100%; 
+    padding: 8px
+}
+
+.createexpirementbutton{
+    width: 100%; 
+    padding: 10px; 
+    border: none;
+    background-color: #4318FF;
+    color: #fff;
+}

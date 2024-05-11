@@ -1,0 +1,45 @@
+.titre {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px
+}
+
+.form-group input{
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.temps {
+    display: flex; 
+    gap: 10px
+}
+
+.temps select{
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.form-group select{
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.createexpirementbutton{
+    width: 100%; 
+    padding: 10px; 
+    border: none;
+    background-color: #4318FF;
+    color: #fff;
+}
+
