@@ -4,7 +4,8 @@ import Sidebar from "../Components/Sidebar";
 import CreateExperimentModal from "../modals/CreateExperimentModal";
 import AjouterPiloteModal from "../modals/AddPilotExperimentModal";
 import axios from "axios";
-import { backeEndUrl } from "../App.js";
+
+const backeEndUrl = 'https://pilotpulse.pythonanywhere.com';
 
 function ExperimentsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -8,8 +8,6 @@ import CheckAuthentification from './CheckAuthentification';
 import DashboardPage from './Views/DashboardPage';
 import PilotDashboard from './Views/PilotDashboard';
 
-
-const backeEndUrl = 'https://pilotpulse.pythonanywhere.com'
 function App() {
   return (
     <Router>
@@ -33,4 +31,4 @@ function App() {
     </Router>
   );
 }
-export {App, backeEndUrl};
+export default App;

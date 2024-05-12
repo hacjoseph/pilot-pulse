@@ -5,7 +5,8 @@ import CreatePilotModal from "../modals/CreatePilotModal";
 import ModifyPilotModal from "../modals/ModifyPilotModal";
 import Modal from "react-modal";
 import axios from "axios";
-import { backeEndUrl } from "../App.js";
+
+const backeEndUrl = 'https://pilotpulse.pythonanywhere.com';
 
 Modal.setAppElement("#root");
 

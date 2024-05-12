@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import axios from "axios";
-import { backeEndUrl } from "../App.js";
+
+const backeEndUrl = 'https://pilotpulse.pythonanywhere.com';
 
 function AddPilotExperimentModal({ isOpen, closeModal, experimentationId }) {
   const [pilotes, setPilotes] = useState([]);

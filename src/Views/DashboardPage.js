@@ -5,7 +5,6 @@ import Sidebar from "../Components/Sidebar";
 import { Line } from "react-chartjs-2";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { backeEndUrl } from "../App.js";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -29,6 +28,8 @@ ChartJS.register(
   Legend,
   BarElement
 );
+
+const backeEndUrl = 'https://pilotpulse.pythonanywhere.com';
 
 const DashboardPage = () => {
   const { id } = useParams();

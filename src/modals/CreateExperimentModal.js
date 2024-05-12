@@ -3,7 +3,8 @@ import Modal from "react-modal";
 import axios from "axios";
 import AjouterPiloteModal from "./AddPilotExperimentModal";
 import "../Assets/Css/CreateExperimentModal.css";
-import { backeEndUrl } from "../App.js";
+
+const backeEndUrl = 'https://pilotpulse.pythonanywhere.com';
 
 function CreateExperimentModal({ isOpen, closeModal }) {
   const [nom, setNom] = useState("");

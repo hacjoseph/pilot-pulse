@@ -7,7 +7,6 @@ import { Line } from "react-chartjs-2";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Modal from "react-modal";
-import { backeEndUrl } from "../App.js";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -28,6 +27,8 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+const backeEndUrl = 'https://pilotpulse.pythonanywhere.com';
 
 const PilotDashboard = () => {
   const { id } = useParams();

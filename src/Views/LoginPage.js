@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
-import { backeEndUrl } from "../App.js";
+
+const backeEndUrl = 'https://pilotpulse.pythonanywhere.com';
 
 const LOGIN_URL = backeEndUrl + "/api/login/";
 
