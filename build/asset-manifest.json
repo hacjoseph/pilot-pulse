@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/pilot-pulse/static/css/main.3d2db48d.css",
+    "main.js": "/pilot-pulse/static/js/main.140a4563.js",
+    "static/js/213.1b199bfe.chunk.js": "/pilot-pulse/static/js/213.1b199bfe.chunk.js",
+    "static/js/455.b96da886.chunk.js": "/pilot-pulse/static/js/455.b96da886.chunk.js",
+    "static/js/453.1bd77c1b.chunk.js": "/pilot-pulse/static/js/453.1bd77c1b.chunk.js",
+    "static/media/logo.svg": "/pilot-pulse/static/media/logo.3e797e00c745f7ae6fdde96db85189fa.svg",
+    "index.html": "/pilot-pulse/index.html",
+    "main.3d2db48d.css.map": "/pilot-pulse/static/css/main.3d2db48d.css.map",
+    "main.140a4563.js.map": "/pilot-pulse/static/js/main.140a4563.js.map",
+    "213.1b199bfe.chunk.js.map": "/pilot-pulse/static/js/213.1b199bfe.chunk.js.map",
+    "455.b96da886.chunk.js.map": "/pilot-pulse/static/js/455.b96da886.chunk.js.map",
+    "453.1bd77c1b.chunk.js.map": "/pilot-pulse/static/js/453.1bd77c1b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3d2db48d.css",
+    "static/js/main.140a4563.js"
+  ]
+}
