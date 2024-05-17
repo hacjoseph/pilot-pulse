@@ -228,7 +228,7 @@ const downloadPDF = () => {
                     
                     <img 
                       src={photoUrl} 
-                      alt={`Photo de ${dashboardData.pilote?.prenom || 'Inconnu'}`} 
+                      alt={`${dashboardData.pilote?.prenom || 'Inconnu'}`} 
                       className="pilot-photo" 
                     />
                   ) : (

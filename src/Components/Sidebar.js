@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import logo from "../Assets/Img/logo.svg";
 import {
@@ -13,10 +13,9 @@ function Sidebar() {
 
   const location = useLocation();
 
-  const getActiveMenu = () =>
-    localStorage.getItem("activeMenu") || location.pathname;
-
-  const [activeMenu, setActiveMenu] = useState(getActiveMenu());
+  const [activeMenu, setActiveMenu] = useState(() => {
+    return localStorage.getItem("activeMenu") || location.pathname;
+  });
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -30,9 +29,13 @@ function Sidebar() {
     history.push(route);
   };
 
+  const getActiveMenu = useCallback(() => {
+    return localStorage.getItem("activeMenu") || location.pathname;
+  }, [location.pathname]);
+
   useEffect(() => {
     setActiveMenu(getActiveMenu());
-  }, [location.pathname]);
+  }, [location.pathname,getActiveMenu]);
 
   return (
     <div className="sidebar">
