@@ -13,7 +13,7 @@ function CreatePilotModal({ isOpen, closeModal }) {
     experience: "",
     photo: "",
     sexe: "",
-    redirect_to: "http://localhost:3000/pilots/",
+    redirect_to: "https://pilot-pulse.netlify.app/pilots/",
   });
 
   const [errors, setErrors] = useState({});

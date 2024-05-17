@@ -31,7 +31,7 @@ function AddPilotExperimentModal({ isOpen, closeModal, experimentationId }) {
     const data = {
       pilote: selectedPilote,
       experimentation: experimentationId,
-      redirect_to: "http://localhost:3000/experiments/",
+      redirect_to: "https://pilot-pulse.netlify.app/experiments/",
     };
 
     axios

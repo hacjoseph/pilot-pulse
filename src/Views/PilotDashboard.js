@@ -34,7 +34,7 @@ ChartJS.register(
   Legend
 );
 
-const backeEndUrl = 'http://localhost:8000';
+const backeEndUrl = 'https://pilotpulse.pythonanywhere.com';
 
 const PilotDashboard = () => {
   const { id } = useParams();
@@ -106,7 +106,7 @@ const PilotDashboard = () => {
       const response = await axios.post(
         backeEndUrl + `/api/pilotes/addfitbit/${id}/`,
         {
-          redirect_to: `http://127.0.0.1:3000/pilote/${id}/`,
+          redirect_to: `https://pilot-pulse.netlify.app/pilote/${id}/`,
         }
       );
       const authorizationUrl = response.data.authorization_url;
@@ -137,7 +137,7 @@ const PilotDashboard = () => {
   }
 
 
-const photoUrl = `http://127.0.0.1:8000/${dashboardData.pilote?.photo}`;
+const photoUrl = backeEndUrl + `/${dashboardData.pilote?.photo}`;
 const heart_rate_by_experimentation = dashboardData.heart_rate_by_experimentation;
 const datasets = Object.keys(heart_rate_by_experimentation).map((experimentId, index) => {
   const experiment = heart_rate_by_experimentation[experimentId];
