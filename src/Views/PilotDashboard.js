@@ -34,7 +34,7 @@ ChartJS.register(
   Legend
 );
 
-const backeEndUrl = 'https://pilotpulse.pythonanywhere.com';
+const backeEndUrl = 'http://localhost:8000';
 
 const PilotDashboard = () => {
   const { id } = useParams();
@@ -136,43 +136,44 @@ const PilotDashboard = () => {
     );
   }
 
-  const photoUrl = backeEndUrl + `/pilotes/${dashboardData.pilote?.photo}`;
 
-  const heart_rate_by_experimentation = dashboardData.heart_rate_by_experimentation;
-  const datasets = Object.keys(heart_rate_by_experimentation).map((experimentId, index) => {
-    const experiment = heart_rate_by_experimentation[experimentId];
-        return {
-          label: `Expérimentation ${experimentId}`,
-          data: experiment["data"].map((y, idx) => ({
-            x: experiment["labels"][idx],
-            y,
-          })),
-          borderColor: `rgba(${index * 100}, ${150 - index * 30}, 200, 1)`,
-          fill: false,
-          tension: 0.4,
-        };
-      });
+const photoUrl = `http://127.0.0.1:8000/${dashboardData.pilote?.photo}`;
+const heart_rate_by_experimentation = dashboardData.heart_rate_by_experimentation;
+const datasets = Object.keys(heart_rate_by_experimentation).map((experimentId, index) => {
+  const experiment = heart_rate_by_experimentation[experimentId];
+      return {
+        label: `Expérimentation ${experimentId}`,
+        data: experiment["data"].map((y, idx) => ({
+          x: experiment["labels"][idx],
+          y,
+        })),
+        borderColor: `rgba(${index * 100}, ${150 - index * 30}, 200, 1)`,
+        fill: false,
+        tension: 0.4,
+      };
+    });
 
-  const lineData = {
-    datasets: datasets.filter(dataset => dataset.label === `Expérimentation ${selectedExperimentId}`), 
-  };
+const lineData = {
+  datasets: datasets.filter(dataset => dataset.label === `Expérimentation ${selectedExperimentId}`), 
+};
 
-  const downloadPDF = () => {
-    const input = pdfRef.current;
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p','mm','a4', true);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = canvas.width;
-      const imgHeight = canvas.height;
-      const ratio = Math.min(pdfWidth/ imgWidth, pdfHeight/imgHeight);
-      const imgX = (pdfWidth - imgWidth * ratio)/2;
-      const imgY = 30;
-      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth*ratio, imgHeight*ratio);
-      pdf.save('DashboardPilote.pdf');
-    }); 
-  };
+
+const downloadPDF = () => {
+  const input = pdfRef.current;
+  html2canvas(input).then((canvas) => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p','mm','a4', true);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+    const ratio = Math.min(pdfWidth/ imgWidth, pdfHeight/imgHeight);
+    const imgX = (pdfWidth - imgWidth * ratio)/2;
+    const imgY = 30;
+    pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth*ratio, imgHeight*ratio);
+    pdf.save('DashboardPilote.pdf');
+  }); 
+};
 
   return (
     <div className="pilot-dashboard">
@@ -430,5 +431,4 @@ const PilotDashboard = () => {
       </div>
   );
 };
-
 export default PilotDashboard;
