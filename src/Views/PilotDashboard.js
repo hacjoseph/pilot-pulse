@@ -361,13 +361,14 @@ const downloadPDF = () => {
 
                 <div className="experimentations-table">
                     <div className="liste-exp">
-                    <h2>Expérimentations associées</h2>
+                    <h2>Historique des expérimentations</h2>
                     {dashboardData.experimentations?.length > 0 ? (
                       <table style={{ width: '100%' }}>
                         <thead>
                           <tr>
                             <th></th>
                             <th>Nom de l'expérimentation</th>
+                            <th>Date</th>
                             <th>Action</th> 
                           </tr>
                         </thead>
@@ -383,6 +384,7 @@ const downloadPDF = () => {
                                 
                             </td>
                             <td>{experimentation.nom}</td>
+                            <td>{experimentation.date}</td>
                             <td>
                               <Link to={`/experimentation/${experimentation.id}`}>
                                 <button className="view-button">Consulter</button>
@@ -398,7 +400,7 @@ const downloadPDF = () => {
                   </div>
 
                   <div className="liste-pil">
-                  <h2>Pilotes associés</h2>
+                  <h2>Membres de l'équipe</h2>
                   <table style={{ width: "100%" }}>
                     <thead>
                       <tr>
