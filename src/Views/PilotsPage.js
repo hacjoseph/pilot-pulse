@@ -16,6 +16,8 @@ function PilotsPage() {
 
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [selectedPilotId, setSelectedPilotId] = useState(null);
+  const [deleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState(false);
+  const [pilotToDelete, setPilotToDelete] = useState(null);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -40,21 +42,16 @@ function PilotsPage() {
       setData(data.data);
     });
   };
-  const deleteData = (id) => {
-    const confirmation = window.confirm(
-      "Voulez-vous vraiment supprimer cet Pilote ?"
-    );
-    if (confirmation) {
-      axios
-        .delete(backeEndUrl + `/api/pilotes/delete/${id}/`)
-        .then(() => {
-          const updatedData = data.filter((item) => item.id !== id);
-          setData(updatedData);
-        })
-        .catch((error) => {
-          console.error("Erreur lors de la suppression du pilote:", error);
-        });
-    }
+
+  const deleteData = () => {
+    axios.delete(backeEndUrl + `/api/pilotes/delete/${pilotToDelete}/`).then(() => {
+      const updatedData = data.filter((item) => item.id !== pilotToDelete);
+      setData(updatedData);
+      setDeleteConfirmationModalOpen(false);
+    }).catch((error) => {
+      console.error('Erreur lors de la suppression du pilote:', error);
+      setDeleteConfirmationModalOpen(false);
+    });
   };
 
   useEffect(() => {
@@ -85,39 +82,28 @@ function PilotsPage() {
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
-              {data.map((item) => (
-                <tr key={item.id}>
-                  <td>
-                    <img src={item.photo} alt="Pilot" className="pilot-image" />
-                  </td>
-                  <td>
-                    {item.nom} {item.prenom}
-                  </td>
-                  <td>{item.role} </td>
-                  <td>{item.age} </td>
-                  <td>{item.experience} </td>
-                  <td>{item.sexe} </td>
-                  <td>
-                    <button
-                      className="delete-button"
-                      onClick={() => deleteData(item.id)}
-                    >
-                      Supprimer
-                    </button>
-                    <button
-                      className="modify-button"
-                      onClick={() => openModifyModal(item.id)}
-                    >
-                      Modifier
-                    </button>
-                    <Link to={`/pilote/${item.id}`}>
-                      <button className="view-button">Consulter</button>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+              <tbody>
+                {data.map((item) => (
+                  <tr key={item.id}>
+                    <td><img src={item.photo} alt="Pilot" className="pilot-image" /></td>
+                    <td>{item.nom} {item.prenom}</td>
+                    <td>{item.role} </td>
+                    <td>{item.age} </td>
+                    <td>{item.experience} </td>
+                    <td>{item.sexe} </td>
+                    <td>
+                      <button className="delete-button" onClick={() => {
+                      setPilotToDelete(item.id);
+                      setDeleteConfirmationModalOpen(true);
+                    }}>Supprimer</button>
+                      <button className="modify-button" onClick={() => openModifyModal(item.id)}>Modifier</button>
+                      <Link to={`/pilote/${item.id}`}>
+                        <button className="view-button">Consulter</button>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
           </table>
         </div>
       </div>
@@ -128,6 +114,30 @@ function PilotsPage() {
         piloteId={selectedPilotId}
         refreshData={getData}
       />
+      
+      <Modal
+        isOpen={deleteConfirmationModalOpen}
+        onRequestClose={() => setDeleteConfirmationModalOpen(false)}
+        contentLabel="Confirmation de suppression"
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          },
+          content: {
+            width: '400px',
+            margin: 'auto',
+            borderRadius: '8px',
+            padding: '20px', 
+            height: '150px',
+          },
+        }}
+      >
+        <h2>Confirmer la suppression du pilote?</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '15px' }}>
+          <button className="view-button" onClick={() => setDeleteConfirmationModalOpen(false)}>Annuler</button>
+          <button className="delete-button" onClick={deleteData}>Confirmer</button>
+        </div>
+      </Modal>
     </div>
   );
 }

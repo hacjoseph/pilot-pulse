@@ -13,9 +13,11 @@ function Sidebar() {
 
   const location = useLocation();
 
-  const [activeMenu, setActiveMenu] = useState(() => {
-    return localStorage.getItem("activeMenu") || location.pathname;
-  });
+  const getInitialActiveMenu = () => {
+    return location.pathname;
+  };
+
+  const [activeMenu, setActiveMenu] = useState(getInitialActiveMenu);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -34,8 +36,9 @@ function Sidebar() {
   }, [location.pathname]);
 
   useEffect(() => {
-    setActiveMenu(getActiveMenu());
-  }, [location.pathname,getActiveMenu]);
+    const currentPath = location.pathname;
+    setActiveMenu(currentPath);
+  }, [location.pathname]); 
 
   return (
     <div className="sidebar">

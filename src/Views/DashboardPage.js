@@ -67,11 +67,12 @@ const DashboardPage = () => {
   const globalMin = dashboardData.global_heart_rate_range?.min || "N/A";
   const globalMax = dashboardData.global_heart_rate_range?.max || "N/A";
   const globalAverage = dashboardData.global_average_heart_rate || "N/A";
+  const globalNbrHeartRate = dashboardData.total_nbr_heart_rate || 'N/A';
   const experimentationDetails = dashboardData.experimentation_details;
 
+
   const validDatasets = Object.values(heart_rate_by_participant).filter(
-    (participant) =>
-      participant.labels?.length > 0 && participant.data?.length > 0
+    (participant) =>  participant.labels?.length > 0 && participant.data?.length > 0
   );
 
   const lineData = {
@@ -93,9 +94,9 @@ const DashboardPage = () => {
   const downloadPDF = () => {
     setTimeout(() => {
       const input = pdfRef.current;
-      html2canvas(input, { scale: 2 }).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4", true);
+      html2canvas(input, { scale: 6 }).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4', true);
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = pdf.internal.pageSize.getHeight();
         const imgWidth = canvas.width;
@@ -103,15 +104,8 @@ const DashboardPage = () => {
         const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
         const imgX = (pdfWidth - imgWidth * ratio) / 2;
         const imgY = 30;
-        pdf.addImage(
-          imgData,
-          "PNG",
-          imgX,
-          imgY,
-          imgWidth * ratio,
-          imgHeight * ratio
-        );
-        pdf.save("DashboardPilote.pdf");
+        pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+        pdf.save('DashboardPilote.pdf');
       });
     }, 200);
   };
@@ -160,35 +154,24 @@ const DashboardPage = () => {
         </div>
 
         <div className="dashboard-content">
-          <div className="participants-list">
-            {Object.values(heart_rate_by_participant).map(
-              (participant, index) => (
-                <Link
-                  to={`/pilote/${participant.id}`}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <div className="participant-card">
-                    <div className="participant-photo-container">
-                      {participant.photo ? (
-                        <img
-                          src={backeEndUrl + `/${participant.photo}`}
-                          alt={participant.nom}
-                          className="participant-photo"
-                        />
-                      ) : (
-                        <div className="empty-photo" />
-                      )}
-                    </div>
-                    <span className="participant-name">
-                      {participant.nom || "Inconnu"}
-                    </span>
-                    <span className="participant-role">
-                      {participant.role || "Rôle non défini"}
-                    </span>
+        <div className="participants-list">
+            {Object.values(heart_rate_by_participant).map((participant) => (
+                <div className="participant-card"> 
+
+                  <div className="participant-photo-container"> 
+                      <img
+                        src={`http://127.0.0.1:8000${participant.photo}`} 
+                        className="participant-photo"
+                      />
                   </div>
-                </Link>
-              )
-            )}
+                  
+                  <span className="participant-name">{participant.nom || 'Inconnu'}</span>
+                  <span className="participant-role">{participant.role || 'Rôle non défini'}</span>
+                  <Link to={`/pilote/${participant.id}`}>
+                    <button className="view-button">Consulter</button>
+                  </Link>
+                </div>
+                ))}   
           </div>
 
           {validDatasets.length > 0 && (

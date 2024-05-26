@@ -61,9 +61,12 @@ const PilotDashboard = () => {
         const hasAccount = fitbitUser && fitbitUser > 0;
         setHasFitbitAccount(hasAccount);
         if (data.experimentations?.length > 0) {
-          const lastExperimentId = data.experimentations[data.experimentations.length - 1].id;
+          const lastExperimentId =
+            data.experimentations[data.experimentations.length - 1].id;
           setSelectedExperimentations(lastExperimentId);
-          setSelectedExperimentPilots(data.experiment_members[lastExperimentId] || []);
+          setSelectedExperimentPilots(
+            data.experiment_members[lastExperimentId] || []
+          );
         }
       } catch (error) {
         setError("Erreur lors de la récupération des données du dashboard");
@@ -81,13 +84,15 @@ const PilotDashboard = () => {
   const handleExperimentationCheckboxChange = (event, experimentationId) => {
     const isChecked = event.target.checked;
     setSelectedExperimentations(isChecked ? experimentationId : null);
-    
+
     if (isChecked) {
-      setSelectedExperimentPilots(dashboardData.experiment_members[experimentationId] || []);
+      setSelectedExperimentPilots(
+        dashboardData.experiment_members[experimentationId] || []
+      );
     } else {
       setSelectedExperimentPilots([]);
     }
-  };  
+  };
 
   const [selectedExperimentId, setSelectedExperimentations] = useState(null);
   const [selectedExperimentPilots, setSelectedExperimentPilots] = useState([]);
@@ -136,43 +141,46 @@ const PilotDashboard = () => {
     );
   }
 
-
 const photoUrl = backeEndUrl + `/${dashboardData.pilote?.photo}`;
+
 const heart_rate_by_experimentation = dashboardData.heart_rate_by_experimentation;
 const datasets = Object.keys(heart_rate_by_experimentation).map((experimentId, index) => {
   const experiment = heart_rate_by_experimentation[experimentId];
-      return {
-        label: `Expérimentation ${experimentId}`,
-        data: experiment["data"].map((y, idx) => ({
-          x: experiment["labels"][idx],
-          y,
-        })),
-        borderColor: `rgba(${index * 100}, ${150 - index * 30}, 200, 1)`,
-        fill: false,
-        tension: 0.4,
-      };
-    });
+  
+  return {
+    label: `Expérimentation ${experimentId}`, 
+    data: experiment['data'].map((y, idx) => ({ x: experiment['labels'][idx], y })), 
+    borderColor: `rgba(${index * 100}, ${150 - index * 30}, 200, 1)`, 
+    fill: false, 
+  };
+});
 
 const lineData = {
   datasets: datasets.filter(dataset => dataset.label === `Expérimentation ${selectedExperimentId}`), 
 };
 
+const options = {
+  maintainAspectRatio: false,
+  lineTension: 0,
+}
 
 const downloadPDF = () => {
-  const input = pdfRef.current;
-  html2canvas(input).then((canvas) => {
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF('p','mm','a4', true);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-    const imgWidth = canvas.width;
-    const imgHeight = canvas.height;
-    const ratio = Math.min(pdfWidth/ imgWidth, pdfHeight/imgHeight);
-    const imgX = (pdfWidth - imgWidth * ratio)/2;
-    const imgY = 30;
-    pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth*ratio, imgHeight*ratio);
-    pdf.save('DashboardPilote.pdf');
-  }); 
+  setTimeout(() => {
+    const input = pdfRef.current;
+    html2canvas(input, { scale: 6 }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4', true);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 30;
+      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+      pdf.save('DashboardPilote.pdf');
+    });
+  }, 200);
 };
 
   return (

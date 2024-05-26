@@ -111,7 +111,7 @@ function CreatePilotModal({ isOpen, closeModal }) {
             value={formData.nom}
             onChange={handleChange}
           />
-          {errors.nom && <div style={{ color: "red" }}>{errors.nom}</div>}
+          {errors.nom && <div style={{ color: "red", fontSize: '12px' }}>{errors.nom}</div>}
         </div>
 
         <div className="form-group">
@@ -122,7 +122,7 @@ function CreatePilotModal({ isOpen, closeModal }) {
             value={formData.prenom}
             onChange={handleChange}
           />
-          {errors.prenom && <div style={{ color: "red" }}>{errors.prenom}</div>}
+          {errors.prenom && <div style={{ color: "red", fontSize: '12px' }}>{errors.prenom}</div>}
         </div>
 
         <div className="form-group">
@@ -133,7 +133,7 @@ function CreatePilotModal({ isOpen, closeModal }) {
             value={formData.age}
             onChange={handleChange}
           />
-          {errors.age && <div style={{ color: "red" }}>{errors.age}</div>}
+          {errors.age && <div style={{ color: "red", fontSize: '12px' }}>{errors.age}</div>}
         </div>
 
         <div className="form-group">
@@ -145,7 +145,7 @@ function CreatePilotModal({ isOpen, closeModal }) {
             onChange={handleChange}
           />
           {errors.experience && (
-            <div style={{ color: "red" }}>{errors.experience}</div>
+            <div style={{ color: "red", fontSize: '12px' }}>{errors.experience}</div>
           )}
         </div>
 
@@ -157,7 +157,7 @@ function CreatePilotModal({ isOpen, closeModal }) {
             value={formData.role}
             onChange={handleChange}
           />
-          {errors.role && <div style={{ color: "red" }}>{errors.role}</div>}
+          {errors.role && <div style={{ color: "red", fontSize: '12px' }}>{errors.role}</div>}
         </div>
 
         <div className="form-group">

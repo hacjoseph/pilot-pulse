@@ -1,14 +1,32 @@
 .sidebar {
   height: 100vh; 
-  width: 220px; 
-  /*border-right: 1px solid #ccc; /* Bordure à droite */
+  width: 18,33%; 
   background: linear-gradient(
     106.37deg,
-    #34b4f0 80%  /* Bleu clair plus foncé */
-    #69c5f0 75%,  /* Bleu ciel */
-    #95e4ee 50%,  /* Bleu clair */
-    #e0f7fa 25%,  /* Bleu très clair */
+    #34b4f0 80% 
+    #69c5f0 75%,  
+    #95e4ee 50%,
+    #e0f7fa 25%,
   );
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 18,33%;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 30%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 40%;
+  }
 }
 
 .sidebarGlass{
@@ -82,4 +100,31 @@
 .menu .menuItem:last-child{
     position: absolute;
     bottom: 2.3rem;
+}
+
+@media (max-width: 768px) {
+  .logo-container {
+    padding: 10px;
+  }
+
+  .logo {
+    width: 70%;
+  }
+
+  .menuItem {
+    font-size: 12px;
+    gap: 0.5rem;
+    height: 2rem;
+    margin-left: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menuItem {
+    font-size: 10px;
+    height: 1.8rem;
+    margin-left: 0.5rem;
+  }
+
+  
 }
