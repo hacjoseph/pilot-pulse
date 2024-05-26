@@ -159,11 +159,6 @@ const lineData = {
   datasets: datasets.filter(dataset => dataset.label === `Expérimentation ${selectedExperimentId}`), 
 };
 
-const options = {
-  maintainAspectRatio: false,
-  lineTension: 0,
-}
-
 const downloadPDF = () => {
   setTimeout(() => {
     const input = pdfRef.current;

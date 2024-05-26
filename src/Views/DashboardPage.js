@@ -67,7 +67,6 @@ const DashboardPage = () => {
   const globalMin = dashboardData.global_heart_rate_range?.min || "N/A";
   const globalMax = dashboardData.global_heart_rate_range?.max || "N/A";
   const globalAverage = dashboardData.global_average_heart_rate || "N/A";
-  const globalNbrHeartRate = dashboardData.total_nbr_heart_rate || 'N/A';
   const experimentationDetails = dashboardData.experimentation_details;
 
 
@@ -160,7 +159,8 @@ const DashboardPage = () => {
 
                   <div className="participant-photo-container"> 
                       <img
-                        src={`http://127.0.0.1:8000${participant.photo}`} 
+                        src={backeEndUrl +`${participant.photo}`} 
+                        alt="pilot"
                         className="participant-photo"
                       />
                   </div>

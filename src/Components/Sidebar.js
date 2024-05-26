@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect} from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import logo from "../Assets/Img/logo.svg";
 import {
@@ -30,10 +30,6 @@ function Sidebar() {
     localStorage.setItem("activeMenu", route);
     history.push(route);
   };
-
-  const getActiveMenu = useCallback(() => {
-    return localStorage.getItem("activeMenu") || location.pathname;
-  }, [location.pathname]);
 
   useEffect(() => {
     const currentPath = location.pathname;

@@ -26,7 +26,7 @@ function CreateExperimentModal({ isOpen, closeModal }) {
       detail_level,
     };
 
-    if (new Date(date + 'T' + `${heure_fin}:${minute_fin}`) < new Date(date + 'T' + `${heure_debut}:${minute_debut}`)) {
+    if (new Date(`${date}T${heure_fin}:${minute_fin}`) < new Date(`${date}T${heure_debut}:${minute_debut}`)) {
       console.error('La date de fin ne peut pas être antérieure à la date de début.');
       return;
     }
@@ -182,7 +182,7 @@ function CreateExperimentModal({ isOpen, closeModal }) {
           experimentationId={experimentationId}
           closeModal={() => setAjouterPiloteOpen(false)}
         />
-        {new Date(date + 'T' + `${heure_fin}:${minute_fin}`) < new Date(date + 'T' + `${heure_debut}:${minute_debut}`) && (
+        {new Date(`${date}T${heure_fin}:${minute_fin}`) < new Date(`${date}T${heure_debut}:${minute_debut}`) && (
           <div style={{ color: 'red', fontSize: '12px' }}>La date de fin ne peut pas être antérieure à la date de début.</div>
         )}
       </div>
